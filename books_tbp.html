@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+        </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books to be packed</title>
+</head>
+<body>
+    <div id="heading">
+        <h1>Enter the books that you need to pack for the respective days</h1>
+    </div>
+    <div id="tuesday">
+        <h2>Tuesday</h2>
+        <input type="text" class="classes tuesday"><br>
+        <input type="text" class="classes tuesday"><br>
+        <input type="text" class="classes tuesday"><br>
+        <input type="text" class="classes tuesday"><br>
+        <input type="text" class="classes tuesday">
+    </div>
+    <div id="thursday">
+        <h2>Thursday</h2>
+        <input type="text" class="classes thursday"><br>
+        <input type="text" class="classes thursday"><br>
+        <input type="text" class="classes thursday"><br>
+        <input type="text" class="classes thursday"><br>
+        <input type="text" class="classes thursday">
+    </div>
+    <button id = "save">Save</button>
+    <script src="cookies.js"></script>
+    <script>
+        save = document.getElementById("save");
+        save.addEventListener("click", function(){
+            tuesday_fields = document.getElementsByClassName("tuesday");
+            thursday_fields = document.getElementsByClassName("thursday");
+            o = ""
+            b = ""
+            for (var i = 0; i<tuesday_fields.length; i++){
+                o+=tuesday_fields[i].value + ", ";
+                b+=thursday_fields[i].value+", "
+            }
+            tue = o.slice(0, -2);
+            thu = b.slice(0, -2)
+            console.log(tue);
+            console.log(thu)
+            setCookie("tuesday-books", tue, 365);
+            setCookie("thursday-books", thu, 365);
+        })
+    </script>
+    <script>
+        var tuesday_cookie = document.getElementsByClassName("tuesday");
+        var thursday_cookie = document.getElementsByClassName("thursday");
+        tue_list = [];
+        thu_list = [];
+
+        var f = getCookie("tuesday-books");
+        tue_info = f.split(", ")
+        for(var i = 0; i<tuesday_cookie.length; i++){
+            tuesday_cookie[i].value = tue_info[i]
+        }
+        var f = getCookie("thursday-books");
+        thur_info = f.split(", ")
+        for(var i = 0; i<thursday_cookie.length; i++){
+            thursday_cookie[i].value = thur_info[i]
+        }
+    </script>
+    
+    <style>
+        .classes{
+            height: 50;
+            font-size: 24px;
+            width: 1000px;
+        }
+        *{
+            font-family: 'Open Sans', sans-serif;
+        }
+        h1{
+            text-align: center; 
+            padding: 10px;         
+        }
+        #heading{
+            background-color: red;
+            width: fit-content;
+            margin: 0px auto;
+            border-radius: 10px;
+        }
+        #tuesday, #thursday{
+            border-style: solid;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px;
+            background-color: black;
+            border-color: white;
+            color: white;
+            width: fit-content;
+        }
+        input{
+            background-color: transparent;
+            color: white;
+            border-style: solid;
+        }
+        #save{
+            height: 50px;
+            font-size: 24px;
+            background-color: lightgreen;
+            border-style: none;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        #save:hover{
+            opacity: 0.3;
+            cursor: pointer;
+            transition: 2s;
+        }
+        html{
+            background-image: url("https://coolbackgrounds.io/images/backgrounds/index/compute-ea4c57a4.png");
+        }
+    </style>
+</body>
+</html>
